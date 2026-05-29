@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoorrecht 2025–2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #EEE9E2;
+      --surface:   #FFFFFF;
+      --navy:      #1D3557;
+      --navy-lt:   #2A4A72;
+      --green:     #1F7A52;
+      --green-bg:  #E6F5EE;
+      --orange:    #C74A18;
+      --orange-bg: #FDF0EB;
+      --neutral:   #5C6470;
+      --border:    #D8D2C9;
+      --ja:        #2178C4;
+      --nee:       #C74A18;
+      --win:       #8CB8A0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      padding: 28px 40px 0;
+    }
+    header h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+    header p.subtitle {
+      color: #9BB3CC;
+      font-size: 0.9rem;
+      margin-top: 4px;
+      margin-bottom: 20px;
+    }
+
+    /* school tabs */
+    .school-tabs {
+      display: flex;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .school-tab {
+      padding: 10px 24px;
+      background: transparent;
+      border: none;
+      border-radius: 8px 8px 0 0;
+      color: #9BB3CC;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .school-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .school-tab.active {
+      background: var(--bg);
+      color: var(--navy);
+    }
+
+    /* ── MAIN ── */
+    main { padding: 32px 40px 60px; max-width: 1100px; }
+
+    /* bouw tabs */
+    .bouw-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .bouw-tab {
+      padding: 8px 20px;
+      border: 2px solid var(--border);
+      border-radius: 100px;
+      background: var(--surface);
+      color: var(--neutral);
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .bouw-tab:hover { border-color: var(--navy); color: var(--navy); }
+    .bouw-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+    /* section header */
+    .section-header {
+      margin-bottom: 20px;
+    }
+    .section-header h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .section-header p {
+      font-size: 0.85rem;
+      color: var(--neutral);
+      margin-top: 3px;
+    }
+
+    /* ── OUTLIER BANNERS ── */
+    .outlier-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 640px) { .outlier-row { grid-template-columns: 1fr; } }
+
+    .banner {
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .banner.positive { background: var(--green-bg); border: 1.5px solid #A8D9BE; }
+    .banner.negative { background: var(--orange-bg); border: 1.5px solid #F0B8A0; }
+    .banner-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .banner-label {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+    .banner.positive .banner-label { color: var(--green); }
+    .banner.negative .banner-label { color: var(--orange); }
+    .banner-text { font-size: 0.83rem; color: var(--navy); line-height: 1.45; }
+    .banner-score {
+      font-family: 'Sora', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .banner.positive .banner-score { color: var(--green); }
+    .banner.negative .banner-score { color: var(--orange); }
+
+    /* ── CARDS GRID ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+
+    .card {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 20px;
+      border: 1.5px solid var(--border);
+      transition: box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover { box-shadow: 0 6px 24px rgba(29,53,87,0.09); }
+    .card.highlight-pos { border-color: #7EC9A0; border-left: 5px solid var(--green); }
+    .card.highlight-neg { border-color: #F0B070; border-left: 5px solid var(--orange); }
+
+    .card-tag {
+      display: inline-block;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-bottom: 10px;
+    }
+    .tag-pos { background: var(--green-bg); color: var(--green); }
+    .tag-neg { background: var(--orange-bg); color: var(--orange); }
+
+    .card-question {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--navy);
+      margin-bottom: 16px;
+      min-height: 40px;
+    }
+
+    /* bar chart */
+    .bars { display: flex; flex-direction: column; gap: 8px; }
+    .bar-row { display: flex; align-items: center; gap: 10px; }
+    .bar-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--neutral);
+      width: 70px;
+      flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1;
+      height: 10px;
+      background: #EDE9E2;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      width: 0;
+      transition: width 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .fill-ja   { background: var(--ja); }
+    .fill-nee  { background: var(--nee); }
+    .fill-win  { background: var(--win); }
+    .bar-pct {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .pct-ja   { color: var(--ja); }
+    .pct-nee  { color: var(--nee); }
+    .pct-win  { color: #6B9E82; }
+
+    /* legend */
+    .legend {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--neutral); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* hidden panels */
+    .school-panel { display: none; }
+    .school-panel.active { display: block; }
+    .bouw-panel { display: none; }
+    .bouw-panel.active { display: block; }
+
+    @media (max-width: 700px) {
+      header { padding: 20px 20px 0; }
+      main { padding: 20px 20px 50px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hoorrecht 2025–2026</h1>
+  <p class="subtitle">Resultaten leerlingenraadpleging per school</p>
+  <div class="school-tabs">
+    <button class="school-tab active" onclick="switchSchool('gr', this)">🌿 Groenewoud</button>
+    <button class="school-tab"        onclick="switchSchool('st', this)">⭐ Sterrenkwartier</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════════ GROENEWOUD ══════════════ -->
+<div class="school-panel active" id="panel-gr">
+
+  <div class="bouw-tabs">
+    <button class="bouw-tab active" onclick="switchBouw('gr','ob',this)">Onderbouw (gr. 2–4)</button>
+    <button class="bouw-tab"        onclick="switchBouw('gr','bb',this)">Bovenbouw (gr. 5–8)</button>
+  </div>
+
+  <!-- GR ONDERBOUW -->
+  <div class="bouw-panel active" id="gr-ob">
+    <div class="section-header">
+      <h2>Onderbouw — Groenewoud</h2>
+      <p>6 vragen · groepen 2a, 2b, 2c, 3 en 4</p>
+    </div>
+
+    <div class="outlier-row">
+      <div class="banner positive">
+        <div class="banner-icon">✅</div>
+        <div>
+          <div class="banner-label">Positieve uitschieter</div>
+          <div class="banner-text"><span class="banner-score">88% ja</span> — De juf helpt mij nieuwe dingen te leren</div>
+        </div>
+      </div>
+      <div class="banner negative">
+        <div class="banner-icon">⚠️</div>
+        <div>
+          <div class="banner-label">Aandachtspunt</div>
+          <div class="banner-text"><span class="banner-score">38% nee</span> — Ik mag soms zelf kiezen wat ik ga leren (ja = nee = 38%)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ja)"></div> Ja</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--nee)"></div> Nee</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--win)"></div> Weet ik niet</div>
+    </div>
+
+    <div class="cards">
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf helpt mij nieuwe dingen te leren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="88"></div></div><span class="bar-pct pct-ja">88%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="6"></div></div><span class="bar-pct pct-nee">6%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="6"></div></div><span class="bar-pct pct-win">6%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf vertelt goed wat ik moet doen</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="83"></div></div><span class="bar-pct pct-ja">83%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="6"></div></div><span class="bar-pct pct-nee">6%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="11"></div></div><span class="bar-pct pct-win">11%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf helpt de kinderen om zich aan de regels en afspraken te houden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="82"></div></div><span class="bar-pct pct-ja">82%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="7"></div></div><span class="bar-pct pct-nee">7%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="11"></div></div><span class="bar-pct pct-win">11%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf helpt mij zodat ik mij fijn en veilig voel op school</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="79"></div></div><span class="bar-pct pct-ja">79%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="8"></div></div><span class="bar-pct pct-nee">8%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="13"></div></div><span class="bar-pct pct-win">13%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">Wie vindt dat de juf haar/hem goed helpt als je iets moeilijk vindt?</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="76"></div></div><span class="bar-pct pct-ja">76%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="12"></div></div><span class="bar-pct pct-nee">12%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="12"></div></div><span class="bar-pct pct-win">12%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-neg">
+        <span class="card-tag tag-neg">⚠ Aandachtspunt</span>
+        <div class="card-question">Ik mag soms zelf kiezen wat ik ga leren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="38"></div></div><span class="bar-pct pct-ja">38%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="38"></div></div><span class="bar-pct pct-nee">38%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="24"></div></div><span class="bar-pct pct-win">24%</span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /gr-ob -->
+
+  <!-- GR BOVENBOUW -->
+  <div class="bouw-panel" id="gr-bb">
+    <div class="section-header">
+      <h2>Bovenbouw — Groenewoud</h2>
+      <p>9 vragen · groepen 5, 6, 7 en 8</p>
+    </div>
+
+    <div class="outlier-row">
+      <div class="banner positive">
+        <div class="banner-icon">✅</div>
+        <div>
+          <div class="banner-label">Positieve uitschieter</div>
+          <div class="banner-text"><span class="banner-score">97% ja</span> — Extra uitleg / verlengde instructie voor kinderen die dat nodig hebben</div>
+        </div>
+      </div>
+      <div class="banner negative">
+        <div class="banner-icon">⚠️</div>
+        <div>
+          <div class="banner-label">Sterkste aandachtspunt</div>
+          <div class="banner-text"><span class="banner-score">46% nee</span> — Werk aanpassen voor kinderen die rekenen/spelling/lezen moeilijk vinden</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ja)"></div> Ja</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--nee)"></div> Nee</div>
+    </div>
+
+    <div class="cards">
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf/meester geeft extra uitleg / verlengde instructie aan kinderen die dat nodig hebben</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="97"></div></div><span class="bar-pct pct-ja">97%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="3"></div></div><span class="bar-pct pct-nee">3%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester helpt kinderen om zich aan de regels/afspraken in de klas en op school te houden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="89"></div></div><span class="bar-pct pct-ja">89%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="11"></div></div><span class="bar-pct pct-nee">11%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester maakt soms aparte gedragsafspraken met kinderen die het nodig hebben</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="87"></div></div><span class="bar-pct pct-ja">87%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="13"></div></div><span class="bar-pct pct-nee">13%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester luistert naar wat kinderen zeggen of vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="87"></div></div><span class="bar-pct pct-ja">87%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="13"></div></div><span class="bar-pct pct-nee">13%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">Leerlingen die rekenen/spelling/lezen heel lastig vinden krijgen hulp buiten de klas</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="72"></div></div><span class="bar-pct pct-ja">72%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="28"></div></div><span class="bar-pct pct-nee">28%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester maakt aparte afspraken met kinderen die moeite hebben zich te concentreren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="72"></div></div><span class="bar-pct pct-ja">72%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="28"></div></div><span class="bar-pct pct-nee">28%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester past het werk aan voor kinderen of geeft ander werk aan kinderen die het werk makkelijk vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="71"></div></div><span class="bar-pct pct-ja">71%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="29"></div></div><span class="bar-pct pct-nee">29%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-neg">
+        <span class="card-tag tag-neg">⚠ Aandachtspunt</span>
+        <div class="card-question">De juf/meester zorgt dat kinderen bij iemand terecht kunnen wanneer ze zich niet veilig of fijn voelen</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="76"></div></div><span class="bar-pct pct-ja">76%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="24"></div></div><span class="bar-pct pct-nee">24%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-neg">
+        <span class="card-tag tag-neg">⚠ Sterkste aandachtspunt</span>
+        <div class="card-question">De juf/meester past het werk aan voor kinderen die het werk bij rekenen/spelling/lezen moeilijk vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="54"></div></div><span class="bar-pct pct-ja">54%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="46"></div></div><span class="bar-pct pct-nee">46%</span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /gr-bb -->
+
+</div><!-- /panel-gr -->
+
+
+<!-- ══════════════ STERRENKWARTIER ══════════════ -->
+<div class="school-panel" id="panel-st">
+
+  <div class="bouw-tabs">
+    <button class="bouw-tab active" onclick="switchBouw('st','ob',this)">Onderbouw (gr. 2–4)</button>
+    <button class="bouw-tab"        onclick="switchBouw('st','bb',this)">Bovenbouw (gr. 5–8)</button>
+  </div>
+
+  <!-- ST ONDERBOUW -->
+  <div class="bouw-panel active" id="st-ob">
+    <div class="section-header">
+      <h2>Onderbouw — Sterrenkwartier</h2>
+      <p>6 vragen · groepen 2a, 2b, 2c, 3 en 4</p>
+    </div>
+
+    <div class="outlier-row">
+      <div class="banner positive">
+        <div class="banner-icon">✅</div>
+        <div>
+          <div class="banner-label">Positieve uitschieters</div>
+          <div class="banner-text"><span class="banner-score">95% ja</span> — De juf helpt mij nieuwe dingen te leren · ook 91% en 90% op andere vragen</div>
+        </div>
+      </div>
+      <div class="banner negative">
+        <div class="banner-icon">⚠️</div>
+        <div>
+          <div class="banner-label">Relatief aandachtspunt</div>
+          <div class="banner-text"><span class="banner-score">75% ja / 11% nee</span> — Ik mag soms zelf kiezen wat ik ga leren (laagste score van de zes)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ja)"></div> Ja</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--nee)"></div> Nee</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--win)"></div> Weet ik niet</div>
+    </div>
+
+    <div class="cards">
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf helpt mij nieuwe dingen te leren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="95"></div></div><span class="bar-pct pct-ja">95%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="2"></div></div><span class="bar-pct pct-nee">2%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="3"></div></div><span class="bar-pct pct-win">3%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">Wie vindt dat de juf haar/hem goed helpt als je iets moeilijk vindt?</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="91"></div></div><span class="bar-pct pct-ja">91%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="5"></div></div><span class="bar-pct pct-nee">5%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="4"></div></div><span class="bar-pct pct-win">4%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf vertelt goed wat ik moet doen</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="90"></div></div><span class="bar-pct pct-ja">90%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="3"></div></div><span class="bar-pct pct-nee">3%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="7"></div></div><span class="bar-pct pct-win">7%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf helpt de kinderen om zich aan de regels en afspraken te houden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="89"></div></div><span class="bar-pct pct-ja">89%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="2"></div></div><span class="bar-pct pct-nee">2%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="9"></div></div><span class="bar-pct pct-win">9%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf helpt mij zodat ik mij fijn en veilig voel op school</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="88"></div></div><span class="bar-pct pct-ja">88%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="4"></div></div><span class="bar-pct pct-nee">4%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="8"></div></div><span class="bar-pct pct-win">8%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-neg">
+        <span class="card-tag tag-neg">⚠ Relatief aandachtspunt</span>
+        <div class="card-question">Ik mag soms zelf kiezen wat ik ga leren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="75"></div></div><span class="bar-pct pct-ja">75%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="11"></div></div><span class="bar-pct pct-nee">11%</span></div>
+          <div class="bar-row"><span class="bar-label">Weet ik niet</span><div class="bar-track"><div class="bar-fill fill-win" data-pct="14"></div></div><span class="bar-pct pct-win">14%</span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /st-ob -->
+
+  <!-- ST BOVENBOUW -->
+  <div class="bouw-panel" id="st-bb">
+    <div class="section-header">
+      <h2>Bovenbouw — Sterrenkwartier</h2>
+      <p>9 vragen · groepen 5, 6, 7 en 8</p>
+    </div>
+
+    <div class="outlier-row">
+      <div class="banner positive">
+        <div class="banner-icon">✅</div>
+        <div>
+          <div class="banner-label">Positieve uitschieters</div>
+          <div class="banner-text"><span class="banner-score">96% ja</span> — Extra uitleg / verlengde instructie &nbsp;·&nbsp; <span class="banner-score">95% ja</span> — De juf/meester luistert naar kinderen</div>
+        </div>
+      </div>
+      <div class="banner negative">
+        <div class="banner-icon">⚠️</div>
+        <div>
+          <div class="banner-label">Aandachtspunt</div>
+          <div class="banner-text"><span class="banner-score">24% nee</span> — Aparte afspraken voor kinderen met concentratieproblemen</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--ja)"></div> Ja</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--nee)"></div> Nee</div>
+    </div>
+
+    <div class="cards">
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf/meester geeft extra uitleg / verlengde instructie aan kinderen die dat nodig hebben</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="96"></div></div><span class="bar-pct pct-ja">96%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="4"></div></div><span class="bar-pct pct-nee">4%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-pos">
+        <span class="card-tag tag-pos">★ Positieve uitschieter</span>
+        <div class="card-question">De juf/meester luistert naar wat kinderen zeggen of vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="95"></div></div><span class="bar-pct pct-ja">95%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="5"></div></div><span class="bar-pct pct-nee">5%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">Leerlingen die rekenen/spelling/lezen heel lastig vinden krijgen hulp buiten de klas</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="89"></div></div><span class="bar-pct pct-ja">89%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="11"></div></div><span class="bar-pct pct-nee">11%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester helpt kinderen om zich aan de regels/afspraken in de klas en op school te houden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="89"></div></div><span class="bar-pct pct-ja">89%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="11"></div></div><span class="bar-pct pct-nee">11%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester zorgt dat kinderen bij iemand terecht kunnen wanneer ze zich niet veilig of fijn voelen</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="86"></div></div><span class="bar-pct pct-ja">86%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="14"></div></div><span class="bar-pct pct-nee">14%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester past het werk aan voor kinderen die het werk bij rekenen/spelling/lezen moeilijk vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="79"></div></div><span class="bar-pct pct-ja">79%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="21"></div></div><span class="bar-pct pct-nee">21%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester past het werk aan voor kinderen of geeft ander werk aan kinderen die het werk makkelijk vinden</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="79"></div></div><span class="bar-pct pct-ja">79%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="21"></div></div><span class="bar-pct pct-nee">21%</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-question">De juf/meester maakt soms aparte gedragsafspraken met kinderen die het nodig hebben</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="81"></div></div><span class="bar-pct pct-ja">81%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="19"></div></div><span class="bar-pct pct-nee">19%</span></div>
+        </div>
+      </div>
+
+      <div class="card highlight-neg">
+        <span class="card-tag tag-neg">⚠ Aandachtspunt</span>
+        <div class="card-question">De juf/meester maakt aparte afspraken met kinderen die moeite hebben zich te concentreren</div>
+        <div class="bars">
+          <div class="bar-row"><span class="bar-label">Ja</span><div class="bar-track"><div class="bar-fill fill-ja" data-pct="76"></div></div><span class="bar-pct pct-ja">76%</span></div>
+          <div class="bar-row"><span class="bar-label">Nee</span><div class="bar-track"><div class="bar-fill fill-nee" data-pct="24"></div></div><span class="bar-pct pct-nee">24%</span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /st-bb -->
+
+</div><!-- /panel-st -->
+
+</main>
+
+<script>
+  function switchSchool(id, btn) {
+    document.querySelectorAll('.school-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.school-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+    animateBars();
+  }
+
+  function switchBouw(school, bouw, btn) {
+    const panel = document.getElementById('panel-' + school);
+    panel.querySelectorAll('.bouw-panel').forEach(p => p.classList.remove('active'));
+    panel.querySelectorAll('.bouw-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById(school + '-' + bouw).classList.add('active');
+    btn.classList.add('active');
+    animateBars();
+  }
+
+  function animateBars() {
+    // reset, then animate after a tick
+    document.querySelectorAll('.bar-fill').forEach(b => b.style.width = '0');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.bouw-panel.active .bar-fill').forEach(b => {
+          b.style.width = b.dataset.pct + '%';
+        });
+      });
+    });
+  }
+
+  // Animate on load
+  window.addEventListener('load', animateBars);
+</script>
+
+</body>
+</html>
