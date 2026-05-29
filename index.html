@@ -344,7 +344,7 @@
                     <h3>📅 ICT-Kwaliteitskalender</h3>
                     <p>Structurele planning van alle ICT-werkzaamheden gedurende het schooljaar. Inclusief onderhouds- en evaluatiemomenten.</p>
                     <div class="card-buttons">
-                        <button class="btn btn-view" onclick="viewDocument('/ICT/ict-kalender')">View Online</button>
+                        <button class="btn btn-view" onclick="viewDocument('ict-kalender')">View Online</button>
                     </div>
                 </div>
 
@@ -492,7 +492,7 @@
 
         <!-- FOOTER -->
         <footer>
-            <p>© 2026 Yoeran Moreel | Marimba & Duif (Nissewijs)</p>
+            <p>© 2026 Yoeran Moreel | Marimba (Nissewijs)</p>
         </footer>
     </div>
 
@@ -534,13 +534,13 @@ switch(docType) {
     case 'ict-kalender':
         content.innerHTML = '<h2>ICT-Kwaliteitskalender 2025-2026</h2>' +
             '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'ICT/ict-kwaliteitskalender.pdf') + '"></iframe>';
+            encodeURIComponent(baseURL + 'ict-kwaliteitskalender.pdf') + '"></iframe>';
         break;
     
     case 'ict-jaarplan':
         content.innerHTML = '<h2>ICT-Jaarplan</h2>' +
             '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'ICT/ict-jaarplan.pdf') + '"></iframe>';
+            encodeURIComponent(baseURL + 'ict-jaarplan.pdf') + '"></iframe>';
         break;
     
     case 'povo-plan':
@@ -552,19 +552,19 @@ switch(docType) {
     case 'kwaliteitskaart':
         content.innerHTML = '<h2>Kwaliteitskaart Praktijklessen</h2>' +
             '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'Techniek/kwaliteitskaart-praktijklessen.pdf') + '"></iframe>';
+            encodeURIComponent(baseURL + 'kwaliteitskaart-praktijklessen.pdf') + '"></iframe>';
         break;
     
     case 'observatie':
         content.innerHTML = '<h2>Observatieformulier Technieklessen</h2>' +
             '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'Techniek/observatie-technieklessen.pdf') + '"></iframe>';
+            encodeURIComponent(baseURL + 'observatie-technieklessen.pdf') + '"></iframe>';
         break;
     
     case 'checklist':
         content.innerHTML = '<h2>Checklist Materialen</h2>' +
             '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'Techniek/checklist-technieklessen.pdf') + '"></iframe>';
+            encodeURIComponent(baseURL + 'checklist-technieklessen.pdf') + '"></iframe>';
         break;
     
     default:
