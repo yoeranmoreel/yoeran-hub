@@ -328,10 +328,10 @@
         <div id="home" class="section active">
             <div class="home-content">
                 <h2>Welkom!</h2>
-                <p>Dit is mijn persoonlijke hub waar ik veel projecten, documenten en resources verzamel.</p>
+                <p>Dit is mijn persoonlijke hub waar ik alle projecten, documenten en resources verzamel.</p>
                 <p>Navigeer via de menu's om verschillende categorieën te verkennen.</p>
                 <p style="margin-top: 30px; font-size: 0.95em; opacity: 0.8;">
-                    📍 <strong>Yoeran Moreel</strong> | Leerkracht, ICT-coördinator & Techniekdocent | Marimba (Nissewijs)
+                    📍 <strong>Yoeran Moreel</strong> | ICT-coördinator & Techniekdocent | Marimba / Duif (Nissewijs)
                 </p>
             </div>
         </div>
@@ -492,7 +492,7 @@
 
         <!-- FOOTER -->
         <footer>
-            <p>© 2026 Yoeran Moreel | Marimba (Nissewijs)</p>
+            <p>© 2026 Yoeran Moreel | Marimba & Duif (Nissewijs)</p>
         </footer>
     </div>
 
@@ -527,50 +527,28 @@
 
             // Here you'll add the actual document content or embed
             // For now, showing placeholder structure
-         // GitHub raw content URL base
-const baseURL = 'https://raw.githubusercontent.com/yoeranmoreel/yoeran-hub/main/documents/';
-
-switch(docType) {
-    case 'ict-kalender':
-        content.innerHTML = '<h2>ICT-Kwaliteitskalender 2025-2026</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'ict-kwaliteitskalender.pdf') + '"></iframe>';
-        break;
-    
-    case 'ict-jaarplan':
-        content.innerHTML = '<h2>ICT-Jaarplan</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'ict-jaarplan.pdf') + '"></iframe>';
-        break;
-    
-    case 'povo-plan':
-        content.innerHTML = '<h2>POVO Techniek Implementatieplan</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'Techniek/povo-plan.pdf') + '"></iframe>';
-        break;
-    
-    case 'kwaliteitskaart':
-        content.innerHTML = '<h2>Kwaliteitskaart Praktijklessen</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'kwaliteitskaart-praktijklessen.pdf') + '"></iframe>';
-        break;
-    
-    case 'observatie':
-        content.innerHTML = '<h2>Observatieformulier Technieklessen</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'observatie-technieklessen.pdf') + '"></iframe>';
-        break;
-    
-    case 'checklist':
-        content.innerHTML = '<h2>Checklist Materialen</h2>' +
-            '<iframe class="pdf-viewer" src="https://mozilla.github.io/pdf.js/web/viewer.html?file=' + 
-            encodeURIComponent(baseURL + 'checklist-technieklessen.pdf') + '"></iframe>';
-        break;
-    
-    default:
-        content.innerHTML = '<h2>Document</h2><p>Document viewer</p>';
-}
-            
+            switch(docType) {
+                case 'ict-kalender':
+                    content.innerHTML = '<h2>ICT-Kwaliteitskalender 2025-2026</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Word-document embedden met een PDF viewer of iFrame.</p>';
+                    break;
+                case 'ict-jaarplan':
+                    content.innerHTML = '<h2>ICT-Jaarplan</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Excel of Word document embedden.</p>';
+                    break;
+                case 'povo-plan':
+                    content.innerHTML = '<h2>POVO Techniek Implementatieplan</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Word-document embedden.</p>';
+                    break;
+                case 'kwaliteitskaart':
+                    content.innerHTML = '<h2>Kwaliteitskaart Praktijklessen</h2><p>[Document wordt hier weergegeven]</p>';
+                    break;
+                case 'observatie':
+                    content.innerHTML = '<h2>Observatieformulier Technieklessen</h2><p>[Document wordt hier weergegeven - PDF viewer]</p>';
+                    break;
+                case 'checklist':
+                    content.innerHTML = '<h2>Checklist Materialen</h2><p>[Document wordt hier weergegeven - PDF viewer]</p>';
+                    break;
+                default:
+                    content.innerHTML = '<h2>Document</h2><p>Document viewer</p>';
+            }
 
             viewer.style.display = 'block';
             window.scrollTo(0, 0);
