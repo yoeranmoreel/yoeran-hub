@@ -1,0 +1,564 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoeran's Verzamel Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* HEADER & NAV */
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        /* TAB NAVIGATION */
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: slideUp 0.6s ease-out 0.2s both;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: white;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+        }
+
+        /* SECTIONS */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        /* CARDS - GLASS MORPHISM */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            transition: all 0.3s ease;
+            animation: cardSlide 0.5s ease-out;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 45px 0 rgba(31, 38, 135, 0.25);
+        }
+
+        .card h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-view {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-view:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-placeholder {
+            background: rgba(255, 200, 100, 0.3);
+            color: white;
+            border: 2px dashed rgba(255, 200, 100, 0.6);
+        }
+
+        .btn-placeholder:hover {
+            background: rgba(255, 200, 100, 0.4);
+        }
+
+        /* PDF & DOCUMENT VIEWERS */
+        .viewer-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .viewer-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .pdf-viewer, .iframe-viewer {
+            width: 100%;
+            height: 700px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cardSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* HOME SECTION */
+        .home-content {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        .home-content h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .home-content p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-tabs {
+                gap: 8px;
+            }
+
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 0.9em;
+            }
+
+            .pdf-viewer, .iframe-viewer {
+                height: 500px;
+            }
+
+            .home-content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <h1>🚀 Yoeran's Verzamel Hub</h1>
+            <p class="subtitle">Documenten, projecten en resources op één plek</p>
+        </header>
+
+        <!-- NAVIGATION -->
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="showSection('home')">Home</button>
+            <button class="nav-btn" onclick="showSection('ict')">ICT</button>
+            <button class="nav-btn" onclick="showSection('techniek')">Techniek</button>
+            <button class="nav-btn" onclick="showSection('marimba')">Marimba</button>
+            <button class="nav-btn" onclick="showSection('overige')">Overige</button>
+        </div>
+
+        <!-- ===== HOME SECTION ===== -->
+        <div id="home" class="section active">
+            <div class="home-content">
+                <h2>Welkom!</h2>
+                <p>Dit is mijn persoonlijke hub waar ik alle projecten, documenten en resources verzamel.</p>
+                <p>Navigeer via de menu's om verschillende categorieën te verkennen.</p>
+                <p style="margin-top: 30px; font-size: 0.95em; opacity: 0.8;">
+                    📍 <strong>Yoeran Moreel</strong> | ICT-coördinator & Techniekdocent | Marimba / Duif (Nissewijs)
+                </p>
+            </div>
+        </div>
+
+        <!-- ===== ICT SECTION ===== -->
+        <div id="ict" class="section">
+            <div class="cards-grid">
+                <!-- Kwaliteitskalender -->
+                <div class="card">
+                    <h3>📅 ICT-Kwaliteitskalender</h3>
+                    <p>Structurele planning van alle ICT-werkzaamheden gedurende het schooljaar. Inclusief onderhouds- en evaluatiemomenten.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('ict-kalender')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Jaarplan -->
+                <div class="card">
+                    <h3>📊 ICT-Jaarplan</h3>
+                    <p>Volledig jaarplan met maandelijkse planning, between-vakantie periode planning en samenvattende tabel.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('ict-jaarplan')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Handleidingen -->
+                <div class="card">
+                    <h3>📖 Handleidingen</h3>
+                    <p>Verzameling van handleidingen, richtlijnen en best practices voor ICT-procedures.</p>
+                    <div class="card-buttons">
+                        <a href="handleidingen.html" class="btn btn-link">Ga naar pagina</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TECHNIEK SECTION ===== -->
+        <div id="techniek" class="section">
+            <div class="cards-grid">
+                <!-- POVO Plan -->
+                <div class="card">
+                    <h3>🔧 POVO Techniek Plan</h3>
+                    <p>Uitgebreid implementatieplan voor techniek als doorlopende leerlijn PO-VO, inclusief uitrolstrategie naar andere scholen.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('povo-plan')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Kwaliteitskaart -->
+                <div class="card">
+                    <h3>✓ Kwaliteitskaart Praktijklessen</h3>
+                    <p>Gedetailleerde kwaliteitskaart met visie, doelgroep, werkwijze en inhoud van de technieklessen.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('kwaliteitskaart')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Observatieformulier -->
+                <div class="card">
+                    <h3>👁️ Observatieformulier</h3>
+                    <p>Observatieformat voor beoordeling van vaardigheden en werkhouding, met ondersteuning voor uitstroomadvies.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('observatie')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Checklist Materialen -->
+                <div class="card">
+                    <h3>✅ Checklist Materialen</h3>
+                    <p>Volledige checklist van alle benodigde materialen, verbindingen en gereedschappen.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-view" onclick="viewDocument('checklist')">View Online</button>
+                    </div>
+                </div>
+
+                <!-- Lessen -->
+                <div class="card">
+                    <h3>📚 Lessenbank</h3>
+                    <p>Verzameling van lesopzetten, lesmateriaal en werkbladen voor technieklessen.</p>
+                    <div class="card-buttons">
+                        <a href="lessen.html" class="btn btn-link">Ga naar pagina</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== MARIMBA SECTION ===== -->
+        <div id="marimba" class="section">
+            <div class="cards-grid">
+                <!-- Placeholder 1 -->
+                <div class="card">
+                    <h3>📌 Project 1</h3>
+                    <p>Beschrijving van Marimba-specifiek project 1 komt hier.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-placeholder" onclick="alert('Placeholder - voeg content toe!')">View (Placeholder)</button>
+                    </div>
+                </div>
+
+                <!-- Placeholder 2 -->
+                <div class="card">
+                    <h3>📌 Project 2</h3>
+                    <p>Beschrijving van Marimba-specifiek project 2 komt hier.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-placeholder" onclick="alert('Placeholder - voeg content toe!')">View (Placeholder)</button>
+                    </div>
+                </div>
+
+                <!-- Placeholder 3 -->
+                <div class="card">
+                    <h3>📌 Project 3</h3>
+                    <p>Beschrijving van Marimba-specifiek project 3 komt hier.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-placeholder" onclick="alert('Placeholder - voeg content toe!')">View (Placeholder)</button>
+                    </div>
+                </div>
+
+                <!-- Hoorrecht Website -->
+                <div class="card">
+                    <h3>🌐 Hoorrecht Website</h3>
+                    <p>Interactieve website over hoorrecht in het onderwijs met uitlegvideo's en resources.</p>
+                    <div class="card-buttons">
+                        <a href="hoorrecht.html" class="btn btn-link" target="_blank">Ga naar site</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== OVERIGE SECTION ===== -->
+        <div id="overige" class="section">
+            <div class="cards-grid">
+                <!-- Handige Links -->
+                <div class="card">
+                    <h3>🔗 Handige Links</h3>
+                    <p>Verzameling van nuttige links naar websites, tools en resources.</p>
+                    <div class="card-buttons">
+                        <a href="handige-links.html" class="btn btn-link">Ga naar pagina</a>
+                    </div>
+                </div>
+
+                <!-- Placeholder -->
+                <div class="card">
+                    <h3>📌 Overig Project</h3>
+                    <p>Beschrijving van overig project of document.</p>
+                    <div class="card-buttons">
+                        <button class="btn btn-placeholder" onclick="alert('Placeholder - voeg content toe!')">View (Placeholder)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOCUMENT VIEWERS -->
+        <div id="viewer-modal" style="display:none;">
+            <div class="viewer-container">
+                <button class="btn btn-view" onclick="closeViewer()" style="margin-bottom: 15px;">← Terug</button>
+                <div id="viewer-content"></div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 Yoeran Moreel | Marimba & Duif (Nissewijs)</p>
+        </footer>
+    </div>
+
+    <script>
+        // TAB NAVIGATION
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Close viewer if open
+            closeViewer();
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // DOCUMENT VIEWER
+        function viewDocument(docType) {
+            const viewer = document.getElementById('viewer-modal');
+            const content = document.getElementById('viewer-content');
+
+            // Here you'll add the actual document content or embed
+            // For now, showing placeholder structure
+            switch(docType) {
+                case 'ict-kalender':
+                    content.innerHTML = '<h2>ICT-Kwaliteitskalender 2025-2026</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Word-document embedden met een PDF viewer of iFrame.</p>';
+                    break;
+                case 'ict-jaarplan':
+                    content.innerHTML = '<h2>ICT-Jaarplan</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Excel of Word document embedden.</p>';
+                    break;
+                case 'povo-plan':
+                    content.innerHTML = '<h2>POVO Techniek Implementatieplan</h2><p>[Document wordt hier weergegeven]</p><p>Je kunt hier je Word-document embedden.</p>';
+                    break;
+                case 'kwaliteitskaart':
+                    content.innerHTML = '<h2>Kwaliteitskaart Praktijklessen</h2><p>[Document wordt hier weergegeven]</p>';
+                    break;
+                case 'observatie':
+                    content.innerHTML = '<h2>Observatieformulier Technieklessen</h2><p>[Document wordt hier weergegeven - PDF viewer]</p>';
+                    break;
+                case 'checklist':
+                    content.innerHTML = '<h2>Checklist Materialen</h2><p>[Document wordt hier weergegeven - PDF viewer]</p>';
+                    break;
+                default:
+                    content.innerHTML = '<h2>Document</h2><p>Document viewer</p>';
+            }
+
+            viewer.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function closeViewer() {
+            document.getElementById('viewer-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

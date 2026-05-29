@@ -1,0 +1,220 @@
+lessen.html
+
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessenbank - Yoeran's Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .lesson-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+
+        .lesson-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .lesson-meta {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .lesson-desc {
+            font-size: 0.9em;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .lesson-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .lesson-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .placeholder-lesson {
+            border-left: 3px solid rgba(255, 200, 100, 0.6);
+            opacity: 0.85;
+        }
+
+        .content-info {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .content-info h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .content-info p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="index.html" class="back-btn">← Terug naar Hub</a>
+            <h1>📚 Lessenbank Techniek</h1>
+        </header>
+
+        <div class="lessons-grid">
+            <!-- PLACEHOLDER LESSON CARDS - JIJ KUNT HIER ZELF LESSEN TOEVOEGEN -->
+            
+            <div class="lesson-card placeholder-lesson">
+                <h3>🔧 Les 1: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+
+            <div class="lesson-card placeholder-lesson">
+                <h3>🔨 Les 2: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+
+            <div class="lesson-card placeholder-lesson">
+                <h3>⚡ Les 3: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+
+            <div class="lesson-card placeholder-lesson">
+                <h3>🪛 Les 4: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+
+            <div class="lesson-card placeholder-lesson">
+                <h3>🔌 Les 5: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+
+            <div class="lesson-card placeholder-lesson">
+                <h3>🛠️ Les 6: [Onderwerp]</h3>
+                <div class="lesson-meta">Groep: [aangeven] | Duur: [aangeven] min</div>
+                <div class="lesson-desc">Korte beschrijving van de les en wat leerlingen leren.</div>
+                <button class="lesson-btn" onclick="alert('Placeholder - voeg les content toe!')">View</button>
+            </div>
+        </div>
+
+        <div class="content-info">
+            <h2>💡 Hoe deze pagina te gebruiken</h2>
+            <p><strong>Voor elke les kun je toevoegen:</strong></p>
+            <ul style="margin-left: 20px; color: #555;">
+                <li>Lesopzet (doel, materialen, stappen)</li>
+                <li>Werkbladen of instructiekaarten</li>
+                <li>Afbeeldingen/voorbeelden</li>
+                <li>Video's of links naar externe resources</li>
+                <li>Evaluatieformat</li>
+                <li>Materiaallijst voor die specifieke les</li>
+            </ul>
+            <p style="margin-top: 20px; color: #667eea;"><strong>Tip:</strong> Structureer lessen per thema/module zodat het makkelijk te volgen is.</p>
+        </div>
+
+        <footer>
+            <p>© 2026 Yoeran Moreel | Marimba & Duif (Nissewijs)</p>
+        </footer>
+    </div>
+</body>
+</html>
