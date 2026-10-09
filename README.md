@@ -10,8 +10,14 @@ assets/projects.js bevat een momentopname van de openbare repositories van yoera
 
 ## Structuur
 
-index.html: persoonlijke startpagina en filterbare galerij.
+index.html: compacte startpagina met drie uitgelichte projecten.
+projecten.html: volledige galerij met zoeken en filters.
+over-mij.html: persoonlijke achtergrond en interesses.
+materiaal.html: onderwijsdocumenten en bronnen.
+contact.html: contact via GitHub.
 project.html?id=owner/repo: projectdetails.
+
+De vaste navigatie gebruikt echte pagina-URLs. Browsergeschiedenis en rechtstreeks delen werken zonder client-router.
 assets/hub.css: gedeelde vormgeving.
 assets/hub.js: zoeken, filteren en details.
 
